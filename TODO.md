@@ -1,3 +1,13 @@
+TODO
+=====
+* Pinned releases via meteor update --release
+* hot code push
+#meteorjs Finally, streaming writes with the MeteorFile.prototype.save method. http://bit.ly/12H9f7X 
+#meteorjs File upload package. Streaming uploads with MeteorFile.upload. http://bit.ly/12AC6Mm 
+#meteorjs File upload package. Let's build streaming reads. http://bit.ly/111ZL49 
+
+https://github.com/xolvio/rtds
+
 Issues
 =======
 * No prescribed mvc
@@ -6,4 +16,4 @@ Issues
 * Users fibers
 * Smart packages vs. npm
 * Generic event handlers vs template event handlers
-* 
+* File var scoping and client/compatibility/
