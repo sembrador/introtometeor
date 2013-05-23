@@ -53,9 +53,7 @@
 -->
 <body>
 
-{{> status}}
 
-{{> login}}
 
 <!--
     For example this fallback message is only visible when there is `impress-not-supported` class on body.
@@ -111,7 +109,7 @@
           For: Suncoast.js<br/>
           By: Stephen T. Cannon<br/>
           Founder/CEO of<br/>Atomic Tattoos & EtherPOS<br/>
-          
+          {{loginButtons align="right"}}
         </q>
     </div>
 
@@ -216,6 +214,7 @@
         => Meteor server running on: http://localhost:3000/</p>
         <br/><br/>
         <p>meteor deploy myapp.meteor.com</p>
+        <p>meteor deploy neato.mydomain.com</p>
     </div>
 
     <div id="structuringapps" class="step slide" data-x="6000" data-y="-1500">
@@ -228,13 +227,13 @@
         <b>/lib</b> - gives you client and server shared models and other resources!<br/><br/>
         <b>Finally...</b><br/>
         /public - serve static files.</br><br/>
-        isClient<br/>
-        isServer<br/>
+        if(Meteor.isClient){...}<br/>
+        if(Meteor.isServer){...}<br/>
     </div>
 
     <div id="databasesecurity" class="step slide" data-x="7000" data-y="-1500">
         <p><q>Database Security</q></p>
-        <p><q>Client/Server shared database.</q></p>
+        <p><q>Client/Server same database api.</q></p>
         <p><q>Share models and validators.</q></p>
         <p><q>Server direct Mongodb.</q></p>
         <p><q>Server publish JSON docs.</q></p>
@@ -273,7 +272,7 @@
         <p><q>How does it work?</q></p>
         <p><q>Server publishes.</q></p>
         <p><q>Client subscribes.</q></p>
-        <p><q>Client local reads and local writes.</q></p>
+        <p><q>Client reads and writes locally.</q></p>
         <p><q>Meteor.Collection</q></p>
         <p><q>Patches up client cache.</q></p>
     </div>
@@ -283,7 +282,7 @@
         <p><q>Data is broadcast. Make it NTK!</q></p>
         <p><q>All server code in /server.</q></p>
         <p><q>Remove autopublish and insecure.</q></p>
-        <p><q>Use allow and deny.</q></p>
+        <p><q>Use allow, deny and Match.</q></p>
         <p><q>Use Accounts package.</q></p>
     </div>
     
@@ -311,7 +310,7 @@
       Live updating reactively rendered html.<br/><br/>
       Use handlebars and other templating engines or RYO.<br/><br/>
       Automatic offscreen DOM clean up, callbacks torn down, db queries stopped and template stops updating.<br/><br/>
-      Preserve elements.<br/><br/>
+      Preserve elements, preserve-inputs package, constant or isolate.<br/><br/>
     </div>
 
     <div id="templates" class="step slide" data-x="9000" data-y="1500">
@@ -328,8 +327,8 @@
       <q><b>Smart Packages</b><br/></q>
       Self contained javascript programs.<br/><br/>
       Use meteor list, add or remove<br/><br/>
-      See Meteorite: http://oortcloud.github.io/meteorite/<br/><br/>
-      See Atmosphere: https://atmosphere.meteor.com<br/><br/>
+      See Meteorite: <a href="http://oortcloud.github.io/meteorite/" target="_blank">http://oortcloud.github.io/meteorite/</a><br/><br/>
+      See Atmosphere: <a href="https://atmosphere.meteor.com" target="_blank">https://atmosphere.meteor.com</a><br/><br/>
       Packaging system changing!<br/><br/>
       Roll your app as packages to avoid loading order issues.<br/><br/>
     </div>
@@ -340,8 +339,8 @@
       $ meteor deploy www.myapp.com<br/>
       Set up the hostname as CNAME to origin.meteor.com<br/><br/>
       Or bundle it $ meteor bundle myapp.tgz to create a Node.js app.<br/><br/>
-      Demeteorizer: https://github.com/onmodulus/demeteorizer<br/><br/>
-      Various github shell scripts, Heroku and other Node.js providers.<br/><br/>
+      Demeteorizer: <a href="https://github.com/onmodulus/demeteorizer" target="_blank">https://github.com/onmodulus/demeteorizer</a><br/><br/>
+      Various github shell scripts and Heroku and other Node.js providers too.<br/><br/>
     </div>
 
     <div id="issues" class="step slide" data-x="9000" data-y="3750">
@@ -351,9 +350,29 @@
       No forms handling. Easy forms coming soon!<br/><br/>
       Smart Packages or NPM.  Being addressed!<br/><br/>
       No Scaling. Multi-server architecture on the board!<br/><br/>
-      No SQL!@#$% I like it. SQL on the way!<br/><br/>
-      <a href="https://trello.com/board/meteor-roadmap/508721606e02bb9d570016ae">Trello Meteor Roadmap</a>
+      No SQL!@#$% SQL on the way!<br/><br/>
+      <a href="https://trello.com/board/meteor-roadmap/508721606e02bb9d570016ae" target="_blank">Trello Meteor Roadmap</a>
+    </div>
 
+    <div id="getinvolved" class="step slide" data-x="9000" data-y="4500">
+      <q><b>Get Involved!</b><br/></q>
+      <a href="http://www.meteor.com" target="_blank">www.meteor.com</a><br/><br/>
+      <a href="http://www.meteor.com" target="_blank">docs.meteor.com</a><br/><br/>
+      <a href="http://www.meteor.com/irc" target="_blank">IRC</a><br/><br/>
+      <a href="http://stackoverflow.com/questions/tagged/meteor?sort=newest&pagesize=15" target="_blank">Stackoverflow.com</a><br/><br/>
+      <a href="https://groups.google.com/forum/?fromgroups#!forum/meteor-talk" target="_blank">Google Group Meteor Talk</a><br/><br/>
+      <a href="https://groups.google.com/forum/?fromgroups#!forum/meteor-core" target="_blank">Google Group Meteor Talk</a><br/><br/>
+      <a href="https://trello.com/board/meteor-roadmap/508721606e02bb9d570016ae" target="_blank">Trello Meteor Roadmap</a>
+    </div>
+
+    <div id="credits" class="step slide" data-x="8000" data-y="4500">
+      <q><b>Credits & Thank You</b><br/></q>
+      <a href="https://github.com/bartaz/impress.js" target="_blank">Bartek Szopka - Meteor/Impress.js</a><br/><br/>
+      <a href="http://www.meetup.com/suncoast-js/" target="_blank">Suncoast.js</a><br/><br/>
+      <a href="http://www.cocreativ.com/" target="_blank">Co-Creativ</a><br/><br/>
+      <a href="http://www.meteor.com/" target="_blank">Meteor</a><br/><br/>
+      Thank You,
+      <a href="http://www.stephentcannon.com/contactme" target="_blank">Steve Cannon</a><br/><br/>
     </div>
 
     <div id="imagination" class="step" data-x="6700" data-y="-300" data-scale="6">
@@ -362,29 +381,10 @@
 
     <div id="source" class="step" data-x="6300" data-y="2000" data-rotate="20" data-scale="4">
         <p>want to know more?</p>
-        <q><a href="https://github.com/meteor/meteor">use the source</a>, Luke!</q>
+        <q><a href="https://github.com/meteor/meteor" target="_blank">use the source</a>, Luke!</q>
     </div>
 
-    <div id="one-more-thing" class="step" data-x="6000" data-y="4000" data-scale="2">
-        <p>one more thing...</p>
-    </div>
-
-    <!--
-        
-        And the last one shows full power and flexibility of impress.js.
-        
-        You can not only position element in 3D, but also rotate it around any axis.
-        So this one here will get rotated by -40 degrees (40 degrees anticlockwise) around X axis and
-        10 degrees (clockwise) around Y axis.
-        
-        You can of course rotate it around Z axis with `data-rotate-z` - it has exactly the same effect
-        as `data-rotate` (these two are basically aliases).
-        
-    -->
-    <div id="its-in-3d" class="step" data-x="6200" data-y="4300" data-z="-100" data-rotate-x="-40" data-rotate-y="10" data-scale="2">
-        <p><span class="have">have</span> <span class="you">you</span> <span class="noticed">noticed</span> <span class="its">it's</span> <span class="in">in</span> <b>3D<sup>*</sup></b>?</p>
-        <span class="footnote">* beat that, prezi ;)</span>
-    </div>
+   
 
     <!--
         
