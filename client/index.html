@@ -105,12 +105,13 @@
     -->
     <div id="welcome" class="step slide" data-x="-1000" data-y="-1500">
         <q>
-          <b>Welcome to Intro to Meteor</b><br/>
-          For: Suncoast.js<br/>
-          By: Stephen T. Cannon<br/>
-          Founder/CEO of<br/>Atomic Tattoos & EtherPOS<br/>
-          
+          <b>Welcome to Intro to Meteor</b><br/><br/>
         </q>
+          For: Suncoast.js<br/>
+          By: Stephen T. Cannon aka Steeve<br/><br/>
+          Founder/CEO of Atomic Tattoos & EtherPOS<br/><br/>
+          Founder/CTO of Debit Elite, 24-7 Bill Pay and 360 Sports Media Group
+        
     </div>
 
     <!--
@@ -129,6 +130,7 @@
         
     -->
     <div id="theoldway" class="step slide" data-x="0" data-y="-1500">
+        
       <q>Tired of wiring up RESTful interfaces, duplicating logic on multiple tiers, wrangling multiple languages and wrestling events and bindings?</q>
     </div>
 
@@ -208,13 +210,13 @@
         <p><q>Getting Started</q></p>
         <br/><br/>
         <p>$ curl https://install.meteor.com | /bin/sh<br>
-        $ meteor create myapp<br/>
-        $ cd myapp<br/>
+        $ meteor create bandbattle<br/>
+        $ cd bandbattle<br/>
         $ meteor<br/>
         => Meteor server running on: http://localhost:3000/</p>
         <br/><br/>
-        <p>meteor deploy myapp.meteor.com</p>
-        <p>meteor deploy neato.mydomain.com</p>
+        <p>meteor deploy bandbattle.meteor.com</p>
+        <p>meteor deploy www.bandbattle.com</p>
     </div>
 
     <div id="structuringapps" class="step slide" data-x="6000" data-y="-1500">
@@ -229,23 +231,33 @@
         /public - serve static files.</br><br/>
         if(Meteor.isClient){...}<br/>
         if(Meteor.isServer){...}<br/>
-        Meteor.startup()<br/>
+        Bootstrap with Meteor.startup()<br/>
     </div>
 
     <div id="meteormethods" class="step slide" data-x="7000" data-y="-1500">
         <p><q>Meteor Methods kinda like RPC</q></p>
-        <p><q>Return EJSON or throw error or Meteor.Error.</q></p>
-        <p><q>Support for client stubs for side effects.</q></p>
-        <p><q>Meteor.call() or Meteor.apply()</q></p>
+        Meteor.methods({doSomething:function(args){}})<br/>
+        &nbsp;&nbsp;this.userId</br>
+        &nbsp;&nbsp;this.setUserId(userId)</br>
+        &nbsp;&nbsp;this.isSimulation</br>
+        &nbsp;&nbsp;this.unblock()</br>
+        Return EJSON or throw error or Meteor.Error.<br/></br>
+        Support for client stubs for side effects.<br/></br>
+        Meteor.call(name, param1, param2, ... [, asyncCallback])<br/></br>
+        Meteor.apply(name, params [, options] [, asyncCallback])<br/>
+        &nbsp;&nbsp;wait (client only)</br>
+        &nbsp;&nbsp;onResultReceived (client only)</br>
+        
     </div>
 
     <div id="databasesecurity" class="step slide" data-x="8000" data-y="-1500">
-        <p><q>Database Security</q></p>
-        <p><q>Client/Server same database api.</q></p>
-        <p><q>Share models and validators.</q></p>
-        <p><q>Server direct Mongodb.</q></p>
-        <p><q>Server publish JSON docs.</q></p>
-        <p><q>Client indirect via minimongo.</q></p>
+        <p><q>Database & Database Security</q></p>
+        Client/Server share same database api.<br/></br>
+        Share models and validators between client and server.<br/></br>
+        Server direct Mongodb access.<br/></br>
+        Server publishes JSON docs.<br/></br>
+        Client indirect access via minimongo.<br/></br>
+        How does it do it?<br/></br>
     </div>
 
     <!--
@@ -276,23 +288,91 @@
 
     <div id="howddpworks" class="step slide" data-x="9000" data-y="-1500">
         <p><q>How does it work?</q></p>
-        <p><q>Server publishes with overlap.</q></p>
-        <p><q>Client subscribes, optionally reactively.</q></p>
-        <p><q>Meteor.Collection</q></p>
-        <p><q>Patches up client cache.</q></p>
+        Meteor.Collection (/lib/Bands.js)<br/>
+        &nbsp;&nbsp;Bands = new Meteor.Collection("bands")<br/><br/>
+        Server publishes with overlap. (/server/bands.js)<br/>
+        &nbsp;&nbsp;Meteor.publish("allbands", function(arg1,...) {...})<br/><br/>
+        Client subscribes, optionally reactive. (/client/subscribe.js)<br/>
+        &nbsp;&nbsp;Meteor.subscribe('allbands', arg1,...)<br/><br/>
+        Publishes docs or changes to all client subscriptions and patches up dom.<br/>
+        Meteor.Collection - connection, idGeneration, transform (fetch, findOne, observe, allow, deny)
     </div>
 
-    <div id="battenthehatches" class="step slide" data-x="9000" data-y="-750">
+    <div id="collections" class="step slide" data-x="9000" data-y="-750">
+        <p><q>Meteor.Collection</q></p>
+        find, findOne(selector, [options])<br/>
+        &nbsp;&nbsp;selector: mongo query or string {name:'13th Floor Elevators'}<br/>
+        &nbsp;&nbsp;[options]: sort, skip, fields, reactive, tranform</br></br>
+        insert(doc, [cb(error, result)]) on server no cb blocks returns id or throws e<br/><br/>
+        update(selector, modifier, [options{multi:bool}], [cb(error)]) client by _id only, server no cb blocks or throws e.<br/><br/>
+        remove(selector, [cb(error)]) client by _id only, server no cb blocks or throws e.<br/><br/>
+        allow and deny - more on that later!<br/><br/>
+    </div>
+
+    <div id="collectioncursors" class="step slide" data-x="9000" data-y="0">
+        <p><q>Meteor.Collection.Cursor</q></p>
+        Create with Collection.find.<br/><br/>
+        &nbsp;&nbsp;forEach(callback) for each matching document.<br/><br/>
+        &nbsp;&nbsp;map(callback) over matching docs returning array.<br/><br/>
+        &nbsp;&nbsp;fetch() returns array of matching documents.<br/><br/>
+        &nbsp;&nbsp;count() obvious right?<br/><br/>
+        &nbsp;&nbsp;rewind() obvious right?<br/><br/>
+        &nbsp;&nbsp;observe and observeChanges - more on that later!<br/>
+    </div>
+
+    <div id="letsgetcrudy" class="step slide" data-x="9000" data-y="750">
+        <p><q>Lets get CRUDy</q></p>
+        Read relies on subscriptions and client side queries.<br/><br/>
+        Client side<br/>
+        &nbsp;&nbsp;Bands.insert({name: 'Motorhead', rating: 5})<br/>
+        &nbsp;&nbsp;Bands.update({_id: id}, rating: 4)<br/>
+        &nbsp;&nbsp;Bands.remove({_id: id})<br/>
+        * can only update or remove by _id<br/><br/>
+        Server side. Anything goes!<br/>
+        &nbsp;&nbsp;Bands.update({name: 'Back Flag'}, {$set:{name:'Black Flag'}})<br/>
+        &nbsp;&nbsp;Bands.remove({rating: {$lte: 0}}, {multi:true})<br/>
+        * multi: true required to remove multiple records
+    </div>
+
+    <div id="allowdeny" class="step slide" data-x="9000" data-y="1500">
+        <p><q>Allow Deny</q></p>
+        Callbacks to restrict insert, update and remove from client calls.<br/><br/>
+        If one Allow is true then action occurs.<br/><br/>
+        Except that Deny overrides ALL allow rules.<br/><br/>
+        fetch - string array to define what fields are available.<br/><br/>
+        transform - can override the Meteor.Collection transform.<br/><br/>
+    </div>
+
+    <div id="observe" class="step slide" data-x="9000" data-y="2250">
+        <p><q>observe</q></p>
+        Watch a live query (cursor) and get results as it changes.<br/>
+        &nbsp;&nbsp;added(document)<br/>
+        &nbsp;&nbsp;addedAt(document, atIndex, before)<br/>
+        &nbsp;&nbsp;changed(newDocument, oldDocument)<br/>
+        &nbsp;&nbsp;changedAt(newDocument, oldDocument, atIndex)
+        &nbsp;&nbsp;removed(oldDocument)<br/>
+        &nbsp;&nbsp;removedAt(oldDocument, atIndex)<br/>
+        <p><q>observeChanges</q></p>
+        Only differences of old and new docs passed.<br/>
+        &nbsp;&nbsp;added(id, fields)<br/>
+        &nbsp;&nbsp;addedBefore(id, fields, before)<br/>
+        &nbsp;&nbsp;changed(id, fields)<br/>
+        &nbsp;&nbsp;movedBefore(id, before)<br/>
+        &nbsp;&nbsp;removed(id)<br/>
+    </div>
+
+    <div id="battenthehatches" class="step slide" data-x="9000" data-y="3000">
         <p><q>Batten the hatches!</q></p>
-        <p><q>Data is broadcast. Make it NTK!</q></p>
-        <p><q>All server code in /server.</q></p>
-        <p><q>Remove autopublish and insecure.</q></p>
-        <p><q>Use allow, deny and Match.</q></p>
-        <p><q>Use Accounts package.</q></p>
+        Data is broadcast. Publish on a NEED TO KNOW basis!<br/><br/>
+        Keep all server code in /server.<br/><br/>
+        Remove autopublish and insecure packages<br/><br/>
+        Use allow, deny and Match.<br/><br/>
+        Use Accounts package.<br/><br/>
+        Write models with validators.<br/><br/>
     </div>
     
 
-    <div id="meteoraccounts" class="step slide" data-x="9000" data-y="0">
+    <div id="meteoraccounts" class="step slide" data-x="9000" data-y="3750">
       <q><b>Meter Accounts</b><br/></q>
       <a href="http://en.wikipedia.org/wiki/Secure_Remote_Password_protocol" target="_blank">Secure Remote Password Protocol</a><br/><br/>
       Email or Userid<br/><br/>
@@ -301,16 +381,18 @@
       Meteor.users<br/><br/>
     </div>
 
-    <div id="reactiveprogramming" class="step slide" data-x="9000" data-y="750">
+    <div id="reactiveprogramming" class="step slide" data-x="9000" data-y="4500">
       <q><b>Reactive Programming</b><br/></q>
       Stop pushing and pulling.<br/><br/>
       Reactive computation combined with reactive data source.<br/><br/>
-      Reactive datasources<br/>Session, Collection queries, Meteor.status, Subscription ready(), Meteor.user, Meteor.userId and Meteor.loggingIn.<br/><br/>
-      Reactive computations<br/>Template, Meteor.render and Meteor.renderList and Deps.autorun<br/><br/>
-      Deps.autoRun() to rerun reactive computations including subscriptions<br/><br/>
+      Reactive datasources<br/>
+      &nbsp;&nbsp;Session, Collection queries, Meteor.status, Subscription ready(), Meteor.user, Meteor.userId and Meteor.loggingIn.<br/><br/>
+      Reactive computations<br/>
+      &nbsp;&nbsp;Template, Meteor.render and Meteor.renderList and Deps.autorun<br/><br/>
+      Deps.autoRun() to rerun reactive computations including subscriptions.<br/><br/>
     </div>
 
-    <div id="livehtml" class="step slide" data-x="9000" data-y="1500">
+    <div id="livehtml" class="step slide" data-x="9000" data-y="5250">
       <q><b>Live HTML and No Zombies!</b><br/></q>
       Live updating reactively rendered html.<br/><br/>
       Use handlebars and other templating engines or RYO.<br/><br/>
@@ -318,21 +400,12 @@
       Preserve elements, preserve-inputs package, constant or isolate.<br/><br/>
     </div>
 
-    <div id="templates" class="step slide" data-x="9000" data-y="2250">
-      <q><b>Templates! Oh Joy!</b><br/></q>
-      Handlebars or Jade<br/><br/>
-      No messy custom binding tags.<br/><br/>
-      Heavy lifting real-time updates by Meteor.<br/><br/>
-      Use helper functions.<br/><br/>
-      React and iterate on browser db records.<br/><br/>
-      Wire up events with template Event maps.<br/><br/>
-      Hawt code pushes.<br/><br/>
-    </div>
+    {{> templates}}
 
-    <div id="smartpackages" class="step slide" data-x="9000" data-y="3000">
+    <div id="smartpackages" class="step slide" data-x="8000" data-y="6000">
       <q><b>Smart Packages</b><br/></q>
       Self contained javascript programs.<br/><br/>
-      Use meteor list, add or remove<br/><br/>
+      $ meteor list, add or remove<br/><br/>
       See Meteorite: <a href="http://oortcloud.github.io/meteorite/" target="_blank">http://oortcloud.github.io/meteorite/</a><br/><br/>
       See Atmosphere: <a href="https://atmosphere.meteor.com" target="_blank">https://atmosphere.meteor.com</a><br/><br/>
       Packaging system changing!<br/><br/>
@@ -340,7 +413,14 @@
       Roll your app as packages to avoid loading order issues.<br/><br/>
     </div>
 
-    <div id="deploying" class="step slide" data-x="9000" data-y="3750">
+    <div id="tests" class="step slide" data-x="7000" data-y="6000">
+      <q><b>TDD, ATTD and RTD</b><br/></q>
+      No official TDD but tests should be put in /tests.<br/><br/>
+      Best resources is SO for <a href="http://stackoverflow.com/questions/12987525/meteor-test-driven-development" target="_blank">Meteor TDD</a>.<br/><br/>
+      For RTD including TDD/ATDD see Xolv.io <a href="http://blog.xolv.io/2013/04/add-rtd-to-your-meteor-project.html" target="_blank">Blog</a> and <a href="https://github.com/xolvio/rtd" target="_blank">GH repo</a>.
+    </div>
+
+    <div id="deploying" class="step slide" data-x="6000" data-y="6000">
       <q><b>Deploying</b><br/></q>
       $ meteor deploy myapp.meteor.com<br/><br/>
       $ meteor deploy www.myapp.com<br/>
@@ -351,7 +431,16 @@
       Meteor.sh: <a href="https://github.com/netmute/meteor.sh" target="_blank">https://github.com/netmute/meteor.sh</a><br/><br/>
     </div>
 
-    <div id="issues" class="step slide" data-x="9000" data-y="4500">
+    <div id="alternatives" class="step slide" data-x="5000" data-y="6000">
+      <q><b>Alternatives<br/></q>
+      <a href="http://www.socketstream.org/" target="_blank">Socketstream</a><br/><br/>
+      <a href="http://derbyjs.com/" target="_blank">Derby.js</a><br/><br/>
+      <a href="http://vertx.io/" target="_blank">Vertx.io</a><br/><br/>
+      <a href="http://www.nodejs.org/" target="_blank">Node.js</a> & <a href="http://socket.io/" target="_blank">Socket.io</a> or <a href="https://github.com/sockjs" target="_blank">SocksJS</a><br/><br/>
+      RYO<br/><br/>
+    </div>
+
+    <div id="issues" class="step slide" data-x="4000" data-y="6000">
       <q><b>Issues? <a href="https://trello.com/board/meteor-roadmap/508721606e02bb9d570016ae" target="_blank">Trello</a>, they are listening!</b><br/></q>
       Uses fibers. Understand what that means!<br/><br/>
       No prescribed MVC. Coming soon or RYO!<br/><br/>
@@ -363,7 +452,15 @@
       File var scoping and client/compatibility/<br/><br/>
     </div>
 
-    <div id="getinvolved" class="step slide" data-x="8000" data-y="4500">
+    <div id="benefits" class="step slide" data-x="3000" data-y="6000">
+      <q><b>Benefits<br/></q>
+      Strong highly skilled and experienced team <a href="http://www.meteor.com/about/people" target="_blank">team</a>.<br/><br/>
+      Well <a href="http://www.meteor.com/blog/2012/07/25/meteors-new-112-million-development-budgete" target="_blank">funded</a>. $11.5 million funding for 7 month old open source project.<br/><br/>
+      Responsive Support.<br/><br/>
+      Strong community.<br/><br/>
+    </div>
+
+    <div id="getinvolved" class="step slide" data-x="2000" data-y="6000">
       <q><b>Get Involved!</b><br/></q>
       <a href="http://www.meteor.com" target="_blank">www.meteor.com</a><br/><br/>
       <a href="http://www.meteor.com" target="_blank">docs.meteor.com</a><br/><br/>
@@ -372,6 +469,17 @@
       <a href="https://groups.google.com/forum/?fromgroups#!forum/meteor-talk" target="_blank">Google Group Meteor Talk</a><br/><br/>
       <a href="https://groups.google.com/forum/?fromgroups#!forum/meteor-core" target="_blank">Google Group Meteor Talk</a><br/><br/>
       <a href="https://trello.com/board/meteor-roadmap/508721606e02bb9d570016ae" target="_blank">Trello Meteor Roadmap</a>
+    </div>
+
+    <div id="resources" class="step slide" data-x="1000" data-y="6000">
+      <q><b>Additional Resources</b><br/></q>
+      <a href="http://www.discovermeteor.com/" target="_blank">Discover Meteor</a><br/><br/>
+      <a href="http://yauh.de/articles/376/best-learning-resources-for-meteorjs" target="_blank">Meteor Learning Resources</b><br/><br/>
+      <a href="http://www.eventedmind.com/" target="_blank">Eventedmind.com</a><br/><br/>
+      <a href="http://www.youtube.com/channel/UC3fBiJrFFMhKlsWM46AsAYw">Meteor Youtube</a><br/><br/>
+      <a href="http://madewith.meteor.com">Madewith.Meteor.com</a><br/><br/>
+      <a href="https://plus.google.com/u/0/communities/116805089624721027440">Meteor Google Community</a><br/><br/>
+      <a href="http://meteor.com/blog/" target="_blank">Meteor blog</a><br/><br/>
     </div>
 
     
@@ -385,7 +493,7 @@
         <q><a href="https://github.com/meteor/meteor" target="_blank">use the source</a>, Luke!</q>
     </div>
 
-    <div id="credits" class="step slide" data-x="7000" data-y="4500">
+    <div id="credits" class="step slide" data-x="0" data-y="6000">
       <q><b>Credits & Thank You</b><br/></q>
       <a href="https://github.com/bartaz/impress.js" target="_blank">Bartek Szopka - Meteor/Impress.js</a><br/><br/>
       <a href="http://www.meetup.com/suncoast-js/" target="_blank">Suncoast.js</a><br/><br/>
@@ -412,7 +520,7 @@
         CSS transfrom docs: https://developer.mozilla.org/en/CSS/transform
         
     -->
-    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+    <div id="overview" class="step" data-x="3000" data-y="2000" data-scale="15">
     </div>
 
 </div>

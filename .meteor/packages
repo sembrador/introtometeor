@@ -8,5 +8,6 @@ accounts-ui
 accounts-password
 preserve-inputs
 less
+jquery
 
 

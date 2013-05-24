@@ -53,7 +53,11 @@ Template.status.viewersCount = function() {
   return Viewers.find().count();
 };
 
+
 Meteor.startup(function () {
+  
+  Session.setDefault('get_happy', 'Oh Joy!');
+
   Meteor.setInterval(function() {
     if (Meteor.status().connected) {
       Meteor.call("keepalive");
