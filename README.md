@@ -3,6 +3,9 @@ introtometeor
 
 Inspired by https://github.com/phillc/meteor-impress
 
+A simple introduction to Meteor presentation that supports anonymous viewers and Meter accounts package users.  If admin is logged in all viewers both anonymous and logged in users are lead through the presentation by the admin.
+
+This is a quick hack and does not implement all the necessary Meteor security features.
 
 Meteor
 =============
