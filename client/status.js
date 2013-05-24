@@ -8,6 +8,7 @@ Deps.autorun(function () {
   if(Meteor.user()){
     if(Meteor.user().username == 'admin'){
       var current_leader = currentLeader();
+      // this is a crap way and not secure but works for now
       if(!current_leader){
          Meteor.call("getViewer", function(err, viewerId) {
           Session.set("viewerId", viewerId);
