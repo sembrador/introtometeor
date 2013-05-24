@@ -33,8 +33,7 @@ transitions in modern browsers and inspired by the idea behind prezi.com.
 LICENSE
 ---------
 
-Copyright 2013 Steeve
+Copyright 2013 Stephen T. Cannon aka Steeve
 
 Released under the MIT and GPL Licenses.
-
 

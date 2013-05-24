@@ -105,13 +105,15 @@
     -->
     <div id="welcome" class="step slide" data-x="-1000" data-y="-1500">
         <q>
-          <b>Welcome to Intro to Meteor</b><br/><br/>
-        </q>
-          For: Suncoast.js<br/>
-          By: Stephen T. Cannon aka Steeve<br/><br/>
-          Founder/CEO of Atomic Tattoos & EtherPOS<br/><br/>
-          Founder/CTO of Debit Elite, 24-7 Bill Pay and 360 Sports Media Group
-        
+          <b>Welcome to Intro to <a href="http://www.meteor.com/" target="_blank">Meteor</a><br/></b>
+        </q><br/><br/>
+          For: <a href="http://www.meetup.com/suncoast-js/" target="_blank">Suncoast.js</a><br/>
+          @: <a href="http://www.cocreativ.com/" target="_blank">Co-Creativ</a><br/>
+          By: <a href="http://www.stephentcannon.com/contactme" target="_blank">Stephen T. Cannon</a> aka <a href="http://www.steevecannon.com" target="_blank">Steeve<a/><br/><br/>
+          Founder/CEO of <a href="http://www.atomictattoos.com" target="_blank">Atomic Tattoos</a> & <a href="http://www.etherpos.com" target="_blank">EtherPOS</a><br/><br/>
+          Founder/CTO of <a href="http://www.debitelite.co.uk" target="_blank">Debit Elite<a/>, <a href="http://www.24-7billpay.co.uk" target="_blank">24-7 Bill Pay<a/> and <a href="http://www.cricket360.com/" target="_blank">360 Sports Media Group<a/><br/><br/>
+          <center>GOTO <a href="http://introto.meteor.com">introto.meteor.com</a><br/>&amp; GIT <a href="https://github.com/stephentcannon/bandbattle.git" target="_blank">https://github.com/stephentcannon/bandbattle.git</a>
+        </center></q>    
     </div>
 
     <!--
@@ -207,7 +209,7 @@
     </div>
 
     <div id="gettingstarted" class="step slide" data-x="5000" data-y="-1500">
-        <p><q>Getting Started</q></p>
+        <p><q>Getting Started (step1)</q></p>
         <br/><br/>
         <p>$ curl https://install.meteor.com | /bin/sh<br>
         $ meteor create bandbattle<br/>
@@ -220,7 +222,7 @@
     </div>
 
     <div id="structuringapps" class="step slide" data-x="6000" data-y="-1500">
-        <p><q>Structuring Apps</q></p>
+        <p><q>Structuring Apps (step2)</q></p>
         <b>/server</b><br/>
         Loads Node.js instance in a fiber, single thread per request.<br/><br/>
         <b>/client</b><br/>
@@ -287,9 +289,9 @@
     </div>
 
     <div id="howddpworks" class="step slide" data-x="9000" data-y="-1500">
-        <p><q>How does it work?</q></p>
+        <p><q>How does it work? (step3)</q></p>
         Meteor.Collection (/lib/Bands.js)<br/>
-        &nbsp;&nbsp;Bands = new Meteor.Collection("bands")<br/><br/>
+        &nbsp;&nbsp;Bands = new Meteor.Collection('bands')<br/><br/>
         Server publishes with overlap. (/server/bands.js)<br/>
         &nbsp;&nbsp;Meteor.publish("allbands", function(arg1,...) {...})<br/><br/>
         Client subscribes, optionally reactive. (/client/subscribe.js)<br/>
@@ -299,7 +301,7 @@
     </div>
 
     <div id="collections" class="step slide" data-x="9000" data-y="-750">
-        <p><q>Meteor.Collection</q></p>
+        <p><q>Meteor.Collection (step3)</q></p>
         find, findOne(selector, [options])<br/>
         &nbsp;&nbsp;selector: mongo query or string {name:'13th Floor Elevators'}<br/>
         &nbsp;&nbsp;[options]: sort, skip, fields, reactive, tranform</br></br>
@@ -310,7 +312,7 @@
     </div>
 
     <div id="collectioncursors" class="step slide" data-x="9000" data-y="0">
-        <p><q>Meteor.Collection.Cursor</q></p>
+        <p><q>Meteor.Collection.Cursor (step3)</q></p>
         Create with Collection.find.<br/><br/>
         &nbsp;&nbsp;forEach(callback) for each matching document.<br/><br/>
         &nbsp;&nbsp;map(callback) over matching docs returning array.<br/><br/>
@@ -321,30 +323,31 @@
     </div>
 
     <div id="letsgetcrudy" class="step slide" data-x="9000" data-y="750">
-        <p><q>Lets get CRUDy</q></p>
+        <p><q>Lets get CRUDy (step3)</q></p>
         Read relies on subscriptions and client side queries.<br/><br/>
         Client side<br/>
-        &nbsp;&nbsp;Bands.insert({name: 'Motorhead', rating: 5})<br/>
-        &nbsp;&nbsp;Bands.update({_id: id}, rating: 4)<br/>
+        &nbsp;&nbsp;Bands.insert({name: 'Motorhead', votes: 99999})<br/>
+        &nbsp;&nbsp;Bands.update({_id: id}, {$set:{votes: 4}})<br/>
         &nbsp;&nbsp;Bands.remove({_id: id})<br/>
         * can only update or remove by _id<br/><br/>
         Server side. Anything goes!<br/>
         &nbsp;&nbsp;Bands.update({name: 'Back Flag'}, {$set:{name:'Black Flag'}})<br/>
-        &nbsp;&nbsp;Bands.remove({rating: {$lte: 0}}, {multi:true})<br/>
+        &nbsp;&nbsp;Bands.remove({votes: {$lte: 0}}, {multi:true})<br/>
         * multi: true required to remove multiple records
     </div>
 
     <div id="allowdeny" class="step slide" data-x="9000" data-y="1500">
-        <p><q>Allow Deny</q></p>
+        <p><q>Allow Deny (step3)</q></p>
         Callbacks to restrict insert, update and remove from client calls.<br/><br/>
         If one Allow is true then action occurs.<br/><br/>
         Except that Deny overrides ALL allow rules.<br/><br/>
         fetch - string array to define what fields are available.<br/><br/>
         transform - can override the Meteor.Collection transform.<br/><br/>
+        Bands.insert({name: '13th Floor Elevators', votes: 98989}) from client could fail!
     </div>
 
     <div id="observe" class="step slide" data-x="9000" data-y="2250">
-        <p><q>observe</q></p>
+        <p><q>observe (step4)</q></p>
         Watch a live query (cursor) and get results as it changes.<br/>
         &nbsp;&nbsp;added(document)<br/>
         &nbsp;&nbsp;addedAt(document, atIndex, before)<br/>
@@ -362,7 +365,7 @@
     </div>
 
     <div id="battenthehatches" class="step slide" data-x="9000" data-y="3000">
-        <p><q>Batten the hatches!</q></p>
+        <p><q>Batten the hatches! (step5)</q></p>
         Data is broadcast. Publish on a NEED TO KNOW basis!<br/><br/>
         Keep all server code in /server.<br/><br/>
         Remove autopublish and insecure packages<br/><br/>
@@ -373,16 +376,16 @@
     
 
     <div id="meteoraccounts" class="step slide" data-x="9000" data-y="3750">
-      <q><b>Meter Accounts</b><br/></q>
+      <q><b>Meter Accounts (step6)</b><br/></q>
       <a href="http://en.wikipedia.org/wiki/Secure_Remote_Password_protocol" target="_blank">Secure Remote Password Protocol</a><br/><br/>
       Email or Userid<br/><br/>
       Packages: Facebook, GitHub, Google, Meetup, Twitter, Weibo, Foursquare...<br/><br/>
-      Accounts UI: login, signup, password change, and password reset emails or RYO.<br/><br/>
+      Accounts UI: login, signup, password change, password reset emails and Accounts.ui.config or RYO.<br/><br/>
       Meteor.users<br/><br/>
     </div>
 
     <div id="reactiveprogramming" class="step slide" data-x="9000" data-y="4500">
-      <q><b>Reactive Programming</b><br/></q>
+      <q><b>Reactive Programming (step7)</b><br/></q>
       Stop pushing and pulling.<br/><br/>
       Reactive computation combined with reactive data source.<br/><br/>
       Reactive datasources<br/>
@@ -493,15 +496,21 @@
         <q><a href="https://github.com/meteor/meteor" target="_blank">use the source</a>, Luke!</q>
     </div>
 
-    <div id="credits" class="step slide" data-x="0" data-y="6000">
+    <div id="thepitch" class="step slide" data-x="0" data-y="6000">
+      <q><b>No Escape Without A Pitch!</b><br/></q>
+      <q><b>Tampa Bay Meteor Meetup Group</b><br/></q>
+      <q><b>The EtherPOS Story</b><br/></q>
+    </div>
+
+    <div id="credits" class="step slide" data-x="-1000" data-y="6000">
       <q><b>Credits & Thank You</b><br/></q>
       <a href="https://github.com/bartaz/impress.js" target="_blank">Bartek Szopka - Meteor/Impress.js</a><br/><br/>
       <a href="http://www.meetup.com/suncoast-js/" target="_blank">Suncoast.js</a><br/><br/>
       <a href="http://www.cocreativ.com/" target="_blank">Co-Creativ</a><br/><br/>
       <a href="http://www.meteor.com/" target="_blank">Meteor</a><br/><br/>
       <a href="https://github.com/stephentcannon/introtometeor" target="_blank">introtometeor github</a><br/><br/>
-      Thank You,
-      <a href="http://www.stephentcannon.com/contactme" target="_blank">Steve Cannon</a><br/><br/>
+      Thank You, 
+      <a href="http://www.stephentcannon.com/contactme" target="_blank">Stephen T. Cannon</a> aka <a href="http://www.steevecannon.com" target="_blank">Steeve<a/><br/><br/>
     </div>
    
 
