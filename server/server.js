@@ -26,6 +26,9 @@ Meteor.methods({
         { $set: { last_keepalive: currentTime() } }
       );
     }
+    if(Meteor.users.findOne(this.userId)){
+      Meteor.users.update({_id: this.userId}, {$set: {online: true}});
+    }
   },
   setSlide: function(slide) {
     if(this.userId) {
@@ -35,7 +38,8 @@ Meteor.methods({
 });
 
 Meteor.setInterval(function () {
-  var threshold = currentTime() - 30*1000; // 30 sec
+
+  var threshold = currentTime() - 15*1000; // 30 sec
 
   Viewers.remove({
     $or: [

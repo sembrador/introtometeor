@@ -53,7 +53,6 @@ Template.status.viewersCount = function() {
   return Viewers.find().count();
 };
 
-
 Meteor.startup(function () {
   
   Session.setDefault('get_happy', 'Oh Joy!');
@@ -77,12 +76,3 @@ Meteor.startup(function () {
     Session.set("viewerId", viewerId);
   });
 });
-
-// $(document).ready(function () {
-//   $(window).keydown(function(e){
-//     if(e.which == 13 || e.keyCode == 13) {
-//       e.preventDefault();
-//       e.stopPropagation();
-//     }
-//   });
-// });
