@@ -301,7 +301,7 @@
         &nbsp;&nbsp;Meteor.publish("allbands", function(arg1,...) {...})<br/><br/>
         Client subscribes, optionally reactive. (/client/subscribe.js)<br/>
         &nbsp;&nbsp;Meteor.subscribe('allbands', arg1,...)<br/><br/>
-        Publishes docs or changes to all client subscriptions and patches up dom.<br/>
+        Server publishes docs or changes to all client subscriptions and patches up dom.<br/>
         Meteor.Collection - connection, idGeneration, transform (fetch, findOne, observe, allow, deny)
     </div>
 
@@ -373,7 +373,9 @@
         <p><q>Batten the hatches! (step5)</q></p>
         Data is broadcast. Publish on a NEED TO KNOW basis!<br/><br/>
         Keep all server code in /server.<br/><br/>
-        Remove autopublish and insecure packages<br/><br/>
+        Remove autopublish and insecure packages<br/>
+        &nbsp;&nbsp;meteor list --using or .meteor/packages
+        <br/><br/>
         Use allow, deny and Match.<br/><br/>
         Use Accounts package.<br/><br/>
         Write models with validators.<br/><br/>
