@@ -115,9 +115,9 @@
           Founder/CTO of <a href="http://www.debitelite.co.uk" target="_blank">Debit Elite<a/>, <a href="http://www.24-7billpay.co.uk" target="_blank">24-7 Bill Pay<a/>, <a href="http://www.cricket360.com/" target="_blank">360 Sports Media Group<a/><br/><br/>
           <center>
             PRESENTATION: <a href="http://introto.meteor.com" target="_blank">introto.meteor.com</a><br/>
+            <a href="https://github.com/stephentcannon/introtometeor.git" target="_blank">https://github.com/stephentcannon/introtometeor.git</a>
             SAMPLE APP: <a href="http://bandbattle.meteor.com" target="_blank">bandbattle.meteor.com</a><br/>
-            GIT <a href="https://github.com/stephentcannon/introtometeor.git" target="_blank">https://github.com/stephentcannon/introtometeor.git</a>
-            GIT <a href="https://github.com/stephentcannon/bandbattle.git" target="_blank">https://github.com/stephentcannon/bandbattle.git</a>
+            <a href="https://github.com/stephentcannon/bandbattle.git" target="_blank">https://github.com/stephentcannon/bandbattle.git</a>
         </center></q>    
     </div>
 
@@ -331,7 +331,7 @@
         <p><q>Lets get CRUDy (step3)</q></p>
         Read relies on subscriptions and client side queries.<br/><br/>
         Client side<br/>
-        &nbsp;&nbsp;Bands.insert({name: 'Motorhead', votes: 99999})<br/>
+        &nbsp;&nbsp;Bands.insert({name: 'Motorhead', votes: 999999999})<br/>
         &nbsp;&nbsp;Bands.update({_id: id}, {$set:{votes: 4}})<br/>
         &nbsp;&nbsp;Bands.remove({_id: id})<br/>
         * can only update or remove by _id<br/><br/>
@@ -427,7 +427,8 @@
       <q><b>TDD, ATTD and RTD</b><br/></q>
       No official TDD but tests should be put in /tests.<br/><br/>
       Best resources is SO for <a href="http://stackoverflow.com/questions/12987525/meteor-test-driven-development" target="_blank">Meteor TDD</a>.<br/><br/>
-      For RTD including TDD/ATDD see Xolv.io <a href="http://blog.xolv.io/2013/04/add-rtd-to-your-meteor-project.html" target="_blank">Blog</a> and <a href="https://github.com/xolvio/rtd" target="_blank">GH repo</a>.
+      For RTD including TDD/ATDD see Xolv.io <a href="http://blog.xolv.io/2013/04/add-rtd-to-your-meteor-project.html" target="_blank">Blog</a> and <a href="https://github.com/xolvio/rtd" target="_blank">GH repo</a>.<br/><br/>
+      <a href="http://arunoda.github.io/laika/" target="_blank">Laika - full featured test framework</a>
     </div>
 
     <div id="deploying" class="step slide" data-x="6000" data-y="6000">
@@ -443,11 +444,27 @@
 
     <div id="alternatives" class="step slide" data-x="5000" data-y="6000">
       <q><b>Alternatives<br/></q>
-      <a href="http://www.socketstream.org/" target="_blank">Socketstream</a><br/><br/>
-      <a href="http://derbyjs.com/" target="_blank">Derby.js</a><br/><br/>
-      <a href="http://vertx.io/" target="_blank">Vertx.io</a><br/><br/>
-      <a href="http://www.nodejs.org/" target="_blank">Node.js</a> & <a href="http://socket.io/" target="_blank">Socket.io</a> or <a href="https://github.com/sockjs" target="_blank">SocksJS</a><br/><br/>
-      RYO: angular, ember, knockout and some backend?<br/><br/>
+      <table>
+        <tr>
+          <td><a href="http://www.socketstream.org/" target="_blank">Socketstream</a></td>
+          <td><a href="http://derbyjs.com/" target="_blank">Derby.js</a></td>
+        </tr>
+        <tr>
+          <td><a href="http://vertx.io/" target="_blank">Vertx.io</a></td>
+          <td><a href="http://www.nodejs.org/" target="_blank">Node.js</a> & <a href="http://socket.io/" target="_blank">Socket.io</a> or <a href="https://github.com/sockjs" target="_blank">SocksJS</a> or <a href="https://github.com/substack/dnode" target="_blank">DNode</a></td>
+        </tr>
+        <tr>
+          <td><a href="http://signalr.net/" target="_blank">ASP.net SignalR</a></td>
+          <td><a href="https://developers.google.com/drive/realtime/realtime-quickstart" target="_blank">Google Drive RT API</a></td>
+        </tr>
+        <tr>
+          <td><a href="http://sharejs.org/" target="_blank">Share.js 4 OT</a></td>
+          <td><a href="https://github.com/Flotype/now" target="_blank">Now.js (dead?)</a></td>
+        </tr>
+        <tr>
+          <td colspan="2">RYO: angular, ember, knockout and some backend?</td>
+        </tr>
+      </table>
     </div>
 
     <div id="issues" class="step slide" data-x="4000" data-y="6000">
@@ -506,9 +523,9 @@
     </div>
 
     <div id="thepitch" class="step slide" data-x="0" data-y="6000">
-      <q><b>No Escape Without A Pitch!</b><br/></q>
-      <q><b>Tampa Bay Meteor Meetup Group</b><br/></q>
-      <q><b>The EtherPOS Story</b><br/></q>
+      <q><b>None Escape Without A Pitch!</b><br/><br/></q>
+      Tampa Bay Meteor Meetup Group?<br/></br><br/>
+      The EtherPOS Story<br/>
     </div>
 
     <div id="credits" class="step slide" data-x="-1000" data-y="6000">
